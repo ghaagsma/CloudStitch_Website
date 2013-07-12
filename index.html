@@ -68,7 +68,7 @@
             <h1>CloudStitch</h1>
             <p>Easily stitch together events and actions into workflows to help automate your life.</p>
             <!-- Button to launch sign-up modal window -->
-            <p><a href="#signUpModal" role="button" class="btn btn-primary btn-large" data-toggle="modal">Get started &raquo;</a>
+            <p><a href="#signUpModal" role="button" class="btn btn-primary btn-large" data-toggle="modal" onclick="ClearSignInModal()">Get started &raquo;</a>
             </p>
 
             <!-- Sign-up Modal -->
@@ -79,30 +79,30 @@
                     <h5 id="signUpModalDesc">This is so you can access your personal workflow at any time on any device.</h5>
                 </div>
                 <div class="modal-body">
-                    <form class="form-horizontal">
+                    <form id="signUpForm" class="form-horizontal">
                         <fieldset>
 
                             <!-- Email -->
                             <div class="control-group">
-                                <label class="control-label" for="textinput">Email</label>
+                                <label class="control-label" for="emailInput">Email</label>
                                 <div class="controls">
-                                    <input id="textinput" name="textinput" type="text" class="input-xlarge">
+                                    <input id="emailInput" name="emailInput" type="text" class="input-xlarge">
                                 </div>
                             </div>
 
                             <!-- Password -->
                             <div class="control-group">
-                                <label class="control-label" for="passwordinput">Password</label>
+                                <label class="control-label" for="passwordInput">Password</label>
                                 <div class="controls">
-                                    <input id="passwordinput" name="passwordinput" type="password" class="input-xlarge">
+                                    <input id="passwordInput" name="passwordInput" type="password" class="input-xlarge">
                                 </div>
                             </div>
 
                             <!-- Password verification -->
                             <div class="control-group">
-                                <label class="control-label" for="passwordinput">Verify Password</label>
+                                <label class="control-label" for="passwordVerify">Verify Password</label>
                                 <div class="controls">
-                                    <input id="passwordverify" name="passwordverify" type="password" class="input-xlarge">
+                                    <input id="passwordVerify" name="passwordVerify" type="password" class="input-xlarge">
                                 </div>
                             </div>
 

@@ -1,7 +1,12 @@
 
-function SignIn(email_, password_)
+function SignIn(emailInputId, passwordInputId)
 {
-	email = document.getElementById(email_).value;
-	password = document.getElementById(password_).value;
+	email = document.getElementById(emailInputId).value;
+	password = document.getElementById(passwordInputId).value;
 	alert(email);
+}
+
+function ClearSignInModal()
+{
+	$("#signUpForm input[type=text], #signUpForm input[type=password]").val("");
 }
