@@ -4,6 +4,10 @@ var forwardUrl = process.env.ForwardUrl;
 var listenPort = process.env.PORT;
 
 http.createServer(function(req, res) {
+
+	res.send(200, "Hello world.");
+
+	/*
 	var headers = {
 		"x-zumo-application": process.env.AppKey
 	};
@@ -42,4 +46,5 @@ http.createServer(function(req, res) {
 	req.on('end', function() {
 		zumo_request.end();
 	});
+  */
 }).listen(listenPort);
