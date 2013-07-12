@@ -47,4 +47,4 @@ http.createServer(function(req, res) {
 		zumo_request.end();
 	});
   */
-}).listen(listenPort);
+}).listen(listenPort || 80);
