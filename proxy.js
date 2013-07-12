@@ -4,7 +4,9 @@ var forwardUrl = process.env.ForwardUrl;
 var listenPort = process.env.PORT;
 
 http.createServer(function(req, res) {
-	var headers = {};
+	var headers = {
+		"x-zumo-application": process.env.AppKey
+	};
 	// TODO: I probably don't want to remove _all_ of the other headers...
 	for (var header in req.headers) {
 		if (header.indexOf('x-zumo') == 0) {
