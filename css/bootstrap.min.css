@@ -539,15 +539,6 @@ a.text-info:hover, a.text-info:focus {
 a.text-success:hover, a.text-success:focus {
     color:#356635
 }
-.text-left {
-    text-align:left
-}
-.text-right {
-    text-align:right
-}
-.text-center {
-    text-align:center
-}
 h1, h2, h3, h4, h5, h6 {
     margin:10px 0;
     font-family:inherit;
@@ -1343,7 +1334,8 @@ table {
 }
 .table {
     width:100%;
-    margin-bottom:20px
+    margin-top:20px;
+    margin-bottom:20px;
 }
 .table th, .table td {
     padding:8px;
@@ -4520,4 +4512,25 @@ a.label:hover, a.label:focus, a.badge:hover, a.badge:focus {
 }
 .affix {
     position:fixed
+}
+.text-left {
+    text-align:left
+}
+.text-right {
+    text-align:right
+}
+.text-center {
+    text-align:center
+}
+.valign-top {
+    vertical-align: top;
+}
+.valign-bottom {
+    vertical-align: bottom;
+}
+.valign-center {
+    vertical-align: center;
+}
+.cursor-pointer {
+    cursor: pointer;
 }
