@@ -1,50 +1,45 @@
 var http = require('http');
+var forwardUrl = process.env.ForwardUrl || 'cloudstitch.azure-mobile.net';
 
-var forwardUrl = process.env.ForwardUrl;
-var listenPort = process.env.PORT;
+exports.forward = function (req, res) {
+    console.log('forwarding request for ' + req.path);
 
-http.createServer(function(req, res) {
+    var headers = {
+        'x-zumo-application': process.env.AppKey || 'CRpeeOnzAGfdSjmgrsageYSawSyOdg40'
+    };
+    // TODO: I probably don't want to remove _all_ of the other headers...
+    for (var header in req.headers) {
+        if (header.indexOf('x-zumo') == 0) {
+            headers[header] = req.headers[header];
+        }
+    }
 
-	res.send(200, "Hello world.");
+    var zumo_request = http.request({
+        host: forwardUrl,
+        port: 80,
+        path: req.path,
+        method: req.method,
+        headers: headers
+    }, function (zumo_response) {
+        zumo_response.on('data', function (chunk) {
+            res.write(chunk, 'binary');
+        });
 
-	/*
-	var headers = {
-		"x-zumo-application": process.env.AppKey
-	};
-	// TODO: I probably don't want to remove _all_ of the other headers...
-	for (var header in req.headers) {
-		if (header.indexOf('x-zumo') == 0) {
-			headers[header] = req.headers[header];
-		}
-	}
-	
-	var zumo_request = http.request({
-		host: forwardUrl,
-		port: 80,
-		path: req.url.substring('/zumo'.length),
-		method: req.method,
-		headers: headers
-	}, function(zumo_response) {
-		zumo_response.on('data', function(chunk) {
-			res.write(chunk, 'binary');
-		});
-		
-		zumo_response.on('end', function() {
-			res.end();
-		});
-		res.writeHead(zumo_response.statusCode, zumo_response.headers);
-	});
-	
-	zumo_request.on('error', function(err) {
-		console.log(err);
-	});
-	
-	req.on('data', function(chunk) {
-		zumo_request.write(chunk, 'binary');
-	});
-	
-	req.on('end', function() {
-		zumo_request.end();
-	});
-  */
-}).listen(listenPort || 80);
+        zumo_response.on('end', function () {
+            res.end();
+        });
+        res.writeHead(zumo_response.statusCode, zumo_response.headers);
+    });
+
+    zumo_request.on('error', function (err) {
+        console.log(err);
+    });
+
+    req.on('data', function (chunk) {
+        zumo_request.write(chunk, 'binary');
+    });
+
+    req.on('end', function () {
+        zumo_request.end();
+    });
+}
