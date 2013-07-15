@@ -3716,9 +3716,9 @@ button.btn.btn-mini, input[type="submit"].btn.btn-mini {
 .modal {
     position:fixed;
     top:10%;
-    left:50%;
+    left:30%;
     z-index:1050;
-    width:550px;
+    width:80%;
     margin-left:-280px;
     background-color:#fff;
     border:1px solid #999;
@@ -3733,7 +3733,9 @@ button.btn.btn-mini, input[type="submit"].btn.btn-mini {
     box-shadow:0 3px 7px rgba(0, 0, 0, 0.3);
     -webkit-background-clip:padding-box;
     -moz-background-clip:padding-box;
-    background-clip:padding-box
+    background-clip:padding-box;
+    min-height: 300px;
+    min-width: 500px;
 }
 .modal.fade {
     top:-25%;

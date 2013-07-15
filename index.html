@@ -3,7 +3,7 @@
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
 <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
 <!--[if gt IE 8]><!-->
-<html class="no-js">
+<html ng-app>
 <!--<![endif]-->
 
 <head>
@@ -63,23 +63,65 @@
             <span>
                 <h2 class="float-left">Workflows</h2>
                 <div class="float-right">
-                    <button href="#signUpModal" data-toggle="modal" class="btn btn-primary btn-new-workflow img-rounded">New</button>
+                    <button href="#workflowModal" data-toggle="modal" class="btn btn-primary btn-new-workflow img-rounded">New</button>
                 </div>
 
-                <!-- Sign-up Modal -->
-                <div id="signUpModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="signUpModalLabel" aria-hidden="true">
+                <!-- Add/Edit Workflow Modal -->
+
+                <div id="workflowModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="workflowModalLabel" aria-hidden="true">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                        <h3 id="signUpModalLabel">Create a new workflow</h3>
-                        <h5 id="signUpModalDesc"></h5>
+                        <h3 id="workflowModalLabel">Create a new workflow</h3>
+                        <h5 id="workflowModalDesc"></h5>
                     </div>
-                    <div class="modal-body">
-                        <form id="signUpForm" class="form-horizontal">
-                            <fieldset>
-                                <!-- Triggers -->
-                                <h5 class="text-center">Triggers</h5>
+                    <div class="modal-body" ng-controller="StitchController">
 
-<!--                                 <div class="control-group">
+                        <!-- Manage Stitches -->
+
+                        <h4 class="float-left">Manage Stitches</h4>
+                        <div class="float-right">
+                            <button class="btn btn-primary img-rounded">Add stitch</button>
+                        </div>
+                        <br />
+                        <br />
+                        <div class="accordion" id="stitchCollapse">
+                            <div class="accordion-group" ng-repeat="stitch in stitches">
+                                <div class="accordion-heading">
+                                    <a class="accordion-toggle" data-toggle="collapse" data-parent="#stitchCollapse" href="#{{$index}}">{{stitch.text}}</a>
+                                </div>
+                                <div id="{{$index}}" class="accordion-body collapse">
+                                    <div class="accordion-inner">
+                                        <form class="form-horizontal">
+                                            <div class="control-group">
+                                                <label class="control-label">Type</label>
+                                                <div class="controls">
+                                                    <select>
+                                                        <option>Get RSS</option>
+                                                        <option>Parse XML</option>
+                                                        <option>Send SMS</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                                <!-- <tr>
+                                    <td>
+                                        <div class="valign-center">{{stitch.text}}</div>
+                                    </td>
+                                    <td>
+                                        <div class="valign-center" align="right">
+                                            <button class="btn btn-warning img-rounded">Edit</button>
+                                            <button class="btn btn-danger img-rounded">Delete</button>
+                                        </div>
+                                    </td>
+                                </tr> -->
+                            </div>
+                        </div>
+
+                        <!--                         <form id="signUpForm" class="form-horizontal">
+                            <fieldset>
+                                <div class="control-group">
                                     <label class="control-label" for="emailInput">Email</label>
                                     <div class="controls">
                                         <input id="emailInput" name="emailInput" type="text" class="input-xlarge">
@@ -98,16 +140,18 @@
                                     <div class="controls">
                                         <input id="passwordVerify" name="passwordVerify" type="password" class="input-xlarge">
                                     </div>
-                                </div> -->
+                                </div>
 
                             </fieldset>
-                        </form>
+                        </form> -->
                     </div>
                     <div class="modal-footer">
                         <button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>
-                        <button class="btn btn-primary">Submit</button>
+                        <button class="btn btn-primary" onclick="CreateWorkflow()">Create Workflow</button>
                     </div>
                 </div>
+                <!-- Add/Edit Workflow Modal -->
+
             </span>
             <table id="workflowTable" class="table table-hover table-condensed cursor-pointer">
                 <tbody>
@@ -147,26 +191,17 @@
     <!-- /container -->
 
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+
     <script>
     window.jQuery || document.write('<script src="js/vendor/jquery-1.10.1.min.js"><\/script>')
     </script>
 
     <script src="js/vendor/bootstrap.min.js"></script>
 
+    <script src="js/vendor/angular.js"></script>
+
     <script src="js/main.js"></script>
 
-    <script>
-    var _gaq = [
-        ['_setAccount', 'UA-XXXXX-X'],
-        ['_trackPageview']
-    ];
-    (function(d, t) {
-        var g = d.createElement(t),
-            s = d.getElementsByTagName(t)[0];
-        g.src = '//www.google-analytics.com/ga.js';
-        s.parentNode.insertBefore(g, s)
-    }(document, 'script'));
-    </script>
 </body>
 
 </html>
