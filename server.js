@@ -28,9 +28,8 @@ app.configure('development', function(){
   app.use(express.errorHandler());
 });
 
-app.get('/', routes.index);
-app.get('/users', user.list);
-app.get('/triggers', trigger.list);
+// app.get('/', routes.index);
+// app.get('/users', user.list);
 app.all(/\/api\/?.*/, proxy.forward);
 
 http.createServer(app).listen(app.get('port'), function(){
