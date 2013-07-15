@@ -1,36 +1,29 @@
-function ClearSignInModal() {
-    $("#signUpForm input[type=text], #signUpForm input[type=password]").val("");
-}
-
 function CreateWorkflow() {
-	$('#workflowModal').modal('hide');
+    $('#workflowModal').modal('hide');
 }
 
 function StitchController($scope) {
-	$scope.stitches = [
-    {text:'learn angular'},
-    {text:'build an angular app'},
-    {text:'blah'},
-    {text:'blah2'}];
- 
-  // $scope.addTodo = function() {
-  //   $scope.todos.push({text:$scope.todoText, done:false});
-  //   $scope.todoText = '';
-  // };
- 
-  // $scope.remaining = function() {
-  //   var count = 0;
-  //   angular.forEach($scope.todos, function(todo) {
-  //     count += todo.done ? 0 : 1;
-  //   });
-  //   return count;
-  // };
- 
-  // $scope.archive = function() {
-  //   var oldTodos = $scope.todos;
-  //   $scope.todos = [];
-  //   angular.forEach(oldTodos, function(todo) {
-  //     if (!todo.done) $scope.todos.push(todo);
-  //   });
-  // };
+    $scope.stitches = [];
+
+    $scope.NewWorkflow = function() {
+        $scope.stitches = [];
+    };
+
+    $scope.AddStitch = function() {
+        $scope.stitches.push({
+            name: 'New Stitch'
+        });
+
+        $('.rss-element-' + $scope.stitches.length() - 1).show();
+        $('.xml-element-' + $scope.stitches.length() - 1).hide();
+        $('.sms-element-' + $scope.stitches.length() - 1).hide();
+    }
 }
+
+$(function() {
+    $('.stitchTypeSelector').change(function() {
+        var selected = $(this).val();
+        $(".stitchTypeElement-" + selected).hide();
+        $('#' + selected).show();
+    }).change()
+});

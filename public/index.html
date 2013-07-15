@@ -41,7 +41,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </a>
-                <a class="brand" href="index.html#">CloudStitch</a>
+                <a class="brand" href="#">CloudStitch</a>
                 <div class="nav-collapse collapse">
                     <ul class="nav">
                         <li class="active"><a href="index.html#">Home</a>
@@ -59,11 +59,11 @@
 
     <div class="container">
         <!-- Main hero unit for a primary marketing message or call to action -->
-        <div class="hero-unit">
+        <div class="hero-unit" ng-controller="StitchController">
             <span>
                 <h2 class="float-left">Workflows</h2>
                 <div class="float-right">
-                    <button href="#workflowModal" data-toggle="modal" class="btn btn-primary btn-new-workflow img-rounded">New</button>
+                    <button href="#workflowModal" data-toggle="modal" ng-click="NewWorkflow();" class="btn btn-primary btn-new-workflow img-rounded">New</button>
                 </div>
 
                 <!-- Add/Edit Workflow Modal -->
@@ -74,83 +74,73 @@
                         <h3 id="workflowModalLabel">Create a new workflow</h3>
                         <h5 id="workflowModalDesc"></h5>
                     </div>
-                    <div class="modal-body" ng-controller="StitchController">
+                    <div class="modal-body">
 
                         <!-- Manage Stitches -->
 
                         <h4 class="float-left">Manage Stitches</h4>
                         <div class="float-right">
-                            <button class="btn btn-primary img-rounded">Add stitch</button>
+                            <button class="btn btn-primary img-rounded" ng-click="AddStitch();">Add stitch</button>
                         </div>
                         <br />
                         <br />
                         <div class="accordion" id="stitchCollapse">
                             <div class="accordion-group" ng-repeat="stitch in stitches">
                                 <div class="accordion-heading">
-                                    <a class="accordion-toggle" data-toggle="collapse" data-parent="#stitchCollapse" href="#{{$index}}">{{stitch.text}}</a>
+                                    <a class="accordion-toggle" data-toggle="collapse" data-parent="#stitchCollapse" href="#{{$index}}-collapse">
+                                        [{{$index}}] {{stitch.name}}
+                                    </a>
                                 </div>
-                                <div id="{{$index}}" class="accordion-body collapse">
+                                <div id="{{$index}}-collapse" class="accordion-body collapse">
                                     <div class="accordion-inner">
                                         <form class="form-horizontal">
                                             <div class="control-group">
+                                                <label class="control-label">Name</label>
+                                                <div class="controls">
+                                                    <input id="stitchNameInput" type="text" class="input-xlarge" value={{stitch.name}}>
+                                                </div>
+                                            </div>
+                                            <div class="control-group">
+
+                                                <!-- Control for toggling data-entry forms -->
                                                 <label class="control-label">Type</label>
                                                 <div class="controls">
-                                                    <select>
-                                                        <option>Get RSS</option>
-                                                        <option>Parse XML</option>
-                                                        <option>Send SMS</option>
+                                                    <select class="stitchTypeSelector">
+                                                        <option value="rss-{{$index}}">Get RSS</option>
+                                                        <option value="xml-{{$index}}">Parse XML</option>
+                                                        <option value="sms-{{$index}}">Send SMS</option>
                                                     </select>
                                                 </div>
+
+                                                <!-- Toggle-able Data-entry Forms -->
+                                                <div id="StitchToggleArea">
+                                                    <div id="rss-{{$index}}" class="rss-element-{{$index}} stitchTypeElement-{{$index}}">
+                                                        <h3>RSS</h3>
+                                                    </div>
+                                                    <div id="xml-{{$index}}" class="xml-element-{{$index}} stitchTypeElement-{{$index}}">
+                                                        <h3>XML</h3>
+                                                    </div>
+                                                    <div id="sms-{{$index}}" class="sms-element-{{$index}} stitchTypeElement-{{$index}}">
+                                                        <h3>SMS</h3>
+                                                    </div>
+                                                </div>
+
+                                                <!-- Submit / Cancel Buttons -->
+
                                             </div>
                                         </form>
                                     </div>
                                 </div>
-                                <!-- <tr>
-                                    <td>
-                                        <div class="valign-center">{{stitch.text}}</div>
-                                    </td>
-                                    <td>
-                                        <div class="valign-center" align="right">
-                                            <button class="btn btn-warning img-rounded">Edit</button>
-                                            <button class="btn btn-danger img-rounded">Delete</button>
-                                        </div>
-                                    </td>
-                                </tr> -->
                             </div>
                         </div>
-
-                        <!--                         <form id="signUpForm" class="form-horizontal">
-                            <fieldset>
-                                <div class="control-group">
-                                    <label class="control-label" for="emailInput">Email</label>
-                                    <div class="controls">
-                                        <input id="emailInput" name="emailInput" type="text" class="input-xlarge">
-                                    </div>
-                                </div>
-
-                                <div class="control-group">
-                                    <label class="control-label" for="passwordInput">Password</label>
-                                    <div class="controls">
-                                        <input id="passwordInput" name="passwordInput" type="password" class="input-xlarge">
-                                    </div>
-                                </div>
-
-                                <div class="control-group">
-                                    <label class="control-label" for="passwordVerify">Verify Password</label>
-                                    <div class="controls">
-                                        <input id="passwordVerify" name="passwordVerify" type="password" class="input-xlarge">
-                                    </div>
-                                </div>
-
-                            </fieldset>
-                        </form> -->
                     </div>
                     <div class="modal-footer">
                         <button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>
                         <button class="btn btn-primary" onclick="CreateWorkflow()">Create Workflow</button>
                     </div>
                 </div>
-                <!-- Add/Edit Workflow Modal -->
+
+                <!-- End: Add/Edit Workflow Modal -->
 
             </span>
             <table id="workflowTable" class="table table-hover table-condensed cursor-pointer">
@@ -189,8 +179,6 @@
 
     </div>
     <!-- /container -->
-
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
 
     <script>
     window.jQuery || document.write('<script src="js/vendor/jquery-1.10.1.min.js"><\/script>')
