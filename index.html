@@ -60,7 +60,55 @@
     <div class="container">
         <!-- Main hero unit for a primary marketing message or call to action -->
         <div class="hero-unit">
-            <h2>Workflows</h2>
+            <span>
+                <h2 class="float-left">Workflows</h2>
+                <div class="float-right">
+                    <button href="#signUpModal" data-toggle="modal" class="btn btn-primary btn-new-workflow img-rounded">New</button>
+                </div>
+
+                <!-- Sign-up Modal -->
+                <div id="signUpModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="signUpModalLabel" aria-hidden="true">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                        <h3 id="signUpModalLabel">Create a new workflow</h3>
+                        <h5 id="signUpModalDesc"></h5>
+                    </div>
+                    <div class="modal-body">
+                        <form id="signUpForm" class="form-horizontal">
+                            <fieldset>
+                                <!-- Triggers -->
+                                <h5 class="text-center">Triggers</h5>
+
+<!--                                 <div class="control-group">
+                                    <label class="control-label" for="emailInput">Email</label>
+                                    <div class="controls">
+                                        <input id="emailInput" name="emailInput" type="text" class="input-xlarge">
+                                    </div>
+                                </div>
+
+                                <div class="control-group">
+                                    <label class="control-label" for="passwordInput">Password</label>
+                                    <div class="controls">
+                                        <input id="passwordInput" name="passwordInput" type="password" class="input-xlarge">
+                                    </div>
+                                </div>
+
+                                <div class="control-group">
+                                    <label class="control-label" for="passwordVerify">Verify Password</label>
+                                    <div class="controls">
+                                        <input id="passwordVerify" name="passwordVerify" type="password" class="input-xlarge">
+                                    </div>
+                                </div> -->
+
+                            </fieldset>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>
+                        <button class="btn btn-primary">Submit</button>
+                    </div>
+                </div>
+            </span>
             <table id="workflowTable" class="table table-hover table-condensed cursor-pointer">
                 <tbody>
                     <tr>
@@ -69,8 +117,8 @@
                         </td>
                         <td>
                             <div class="valign-center" align="right">
-                                <button class="btn-warning">Edit</button>
-                                <button class="btn-danger">Delete</button>
+                                <button class="btn btn-warning img-rounded">Edit</button>
+                                <button class="btn btn-danger img-rounded">Delete</button>
                             </div>
                         </td>
                     </tr>
@@ -80,19 +128,8 @@
                         </td>
                         <td>
                             <div class="valign-center" align="right">
-                                <button class="btn-warning">Edit</button>
-                                <button class="btn-danger">Delete</button>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <div class="valign-center">Workflow 3</div>
-                        </td>
-                        <td>
-                            <div class="valign-center" align="right">
-                                <button class="btn-warning">Edit</button>
-                                <button class="btn-danger">Delete</button>
+                                <button class="btn btn-warning img-rounded">Edit</button>
+                                <button class="btn btn-danger img-rounded">Delete</button>
                             </div>
                         </td>
                     </tr>
@@ -103,7 +140,7 @@
         <hr>
 
         <footer>
-            <p>&copy; CloudStitch 2013</p>
+            <p>CloudStitch 2013</p>
         </footer>
 
     </div>

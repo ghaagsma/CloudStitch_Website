@@ -4534,3 +4534,14 @@ a.label:hover, a.label:focus, a.badge:hover, a.badge:focus {
 .cursor-pointer {
     cursor: pointer;
 }
+.float-right {
+    float: right;
+}
+.float-left {
+    float: left;
+}
+.btn-new-workflow {
+    margin-top: 20px;
+    margin-right: 6px;
+    width: 50px;
+}
