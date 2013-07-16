@@ -10,7 +10,7 @@ function StitchController($scope) {
 
     $scope.AddStitch = function() {
         $scope.stitches.push({
-            name: 'New Stitch'
+            name: ''
         });
     };
 
@@ -93,7 +93,7 @@ function StitchController($scope) {
         // Send new workflow to backend
         $.ajax({
             url: "/api/workflows/",
-            type: "post",
+            type: "POST",
             data: wFlow,
             success: function() {
                 alert("success");
