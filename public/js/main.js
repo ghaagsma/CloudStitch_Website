@@ -63,7 +63,7 @@ function StitchController($scope) {
                 newStitch.stitchTemplateId = '{5F6486EB-FD30-4024-8D07-66B398784C4D}';
                 newStitch.sequence = i;
                 newStitch.inputs = [{
-                    name: 'Feed URL',
+                    name: 'FeedUrl',
                     value: $("#rssUrlInput" + i).val()
                 }];
             }
@@ -72,7 +72,7 @@ function StitchController($scope) {
                 newStitch.stitchTemplateId = '{240A7FBB-77FB-42AF-84C1-36D423C53778}';
                 newStitch.sequence = i;
                 newStitch.inputs = [{
-                    name: 'Document URL',
+                    name: 'DocumentUrl',
                     value: $("#xmlUrlInput" + i).val()
                 }, {
                     name: 'Xpath',
@@ -84,7 +84,7 @@ function StitchController($scope) {
                 newStitch.stitchTemplateId = '{6CAC6474-45C4-4F4B-A965-E780AE82B2DC}';
                 newStitch.sequence = i;
                 newStitch.inputs = [{
-                    name: 'Phone Number',
+                    name: 'PhoneNumber',
                     value: $("#smsInput" + i).val()
                 }, {
                     name: 'Message',
