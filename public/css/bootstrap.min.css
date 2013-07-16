@@ -3715,11 +3715,10 @@ button.btn.btn-mini, input[type="submit"].btn.btn-mini {
 }
 .modal {
     position:fixed;
-    top:10%;
-    left:30%;
+    top:20%;
+    left:20%;
+    right:20%;
     z-index:1050;
-    width:80%;
-    margin-left:-280px;
     background-color:#fff;
     border:1px solid #999;
     border:1px solid rgba(0, 0, 0, 0.3);
