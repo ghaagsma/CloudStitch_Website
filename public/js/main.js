@@ -5,6 +5,9 @@ function StitchController($scope, $http) {
         success(function (data, status) {
             console.log(data);
             $scope.workflows = data;
+            if ($scope.workflows.length !== 0) {
+                $('#nothingHereIndicator').css('display', 'none');    
+            }            
         }).
         error(function (data, status) {
             console.log(data);
