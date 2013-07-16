@@ -132,6 +132,7 @@ function StitchController($scope) {
 
         $scope.workflows.push(wFlow);
 
+        $('#nothingHereIndicator').css('display', 'none');
         $('#workflowModal').modal('hide');
         $('#alertDiv').remove();
         $('#workflowNameInput').val("");
