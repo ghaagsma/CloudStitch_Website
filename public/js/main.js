@@ -9,6 +9,7 @@ function LoginController($scope) {
 function StitchController($scope) {
 
     $.ajax({
+        headers: {'x-zumo-application':'CRpeeOnzAGfdSjmgrsageYSawSyOdg40'},
         type: "GET",
         url: "https://cloudstitch.azure-mobile.net/api/workflows/",
         crossDomain: true,
@@ -24,9 +25,6 @@ function StitchController($scope) {
         $scope.stitches = [];
         $('#alertDiv').remove();
         $('#workflowNameInput').val("");
-
-        // Not working...
-        $('#workflowNameInput').focus();
     };
 
     $scope.AddStitch = function() {
@@ -226,3 +224,7 @@ $(function () {
     $("#logged-out button").click(logIn);
     $("#logged-in button").click(logOut);
 });
+
+$('#workflowModal').on('shown', function () {
+     $("#workflowNameInput").focus();
+ });
