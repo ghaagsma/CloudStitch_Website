@@ -16,12 +16,17 @@ function StitchController($scope) {
         $scope.stitches = [];
         $('#alertDiv').remove();
         $('#workflowNameInput').val("");
+
+        // Not working...
+        $('#workflowNameInput').focus();
     };
 
     $scope.AddStitch = function() {
         $scope.stitches.push({
             name: ''
         });
+
+        $scope.stitchNameBind = 'New Stitch';
     };
 
     $scope.DeleteStitch = function(index) {
@@ -77,7 +82,7 @@ function StitchController($scope) {
                     value: $("#smsInput" + i).val()
                 }, {
                     name: 'Message',
-                    value: 'Notification'
+                    value: $("#smsMessageInput" + i).val()
                 }];
             }
             // ???

@@ -24,6 +24,8 @@
     <link rel="stylesheet" href="css/main.css">
 
     <script src="js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
+
+    <script src="js/vendor/angular.js"></script>
 </head>
 
 <body>
@@ -83,7 +85,7 @@
                             <div class="control-group">
                                 <label class="control-label">Name</label>
                                 <div class="controls">
-                                    <input id="workflowNameInput" type="text" class="input-xlarge" value={{stitch.name}}>
+                                    <input id="workflowNameInput" type="text" class="input-xlarge">
                                 </div>
                             </div>
                         </form>
@@ -112,15 +114,15 @@
                                     <div class="accordion-inner">
                                         <form class="form-horizontal">
                                             <div class="control-group">
-                                                <label class="control-label">Name</label>
+                                                <label class="control-label">Stitch Name</label>
                                                 <div class="controls">
-                                                    <input id="stitchNameInput{{$index}}" type="text" class="input-xlarge" value="New Stitch" ng-model="stitchNameBind">
+                                                    <input id="stitchNameInput{{$index}}" type="text" class="input-xlarge" ng-model="stitchNameBind">
                                                 </div>
                                             </div>
                                             <div class="control-group">
 
                                                 <!-- Control for toggling data-entry forms -->
-                                                <label class="control-label">Type</label>
+                                                <label class="control-label">Stitch Type</label>
                                                 <div class="controls">
                                                     <select id="stitchTypeSelector{{$index}}" class="stitchTypeSelector" onchange="stitchTypeChanged({{$index}})">
                                                         <option value="0">Get RSS</option>
@@ -163,6 +165,12 @@
                                                                 <input id="smsInput{{$index}}" type="text" class="input-xlarge">
                                                             </div>
                                                         </div>
+                                                        <div class="control-group">
+                                                            <label class="control-label">Message</label>
+                                                            <div class="controls">
+                                                                <textarea id="smsMessageInput{{$index}}" class="input-xlarge"></textarea>
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -182,7 +190,7 @@
 
             </div>
             <table id="workflowTable" class="table table-hover table-condensed cursor-pointer">
-                <tbody ng-repeat="workflow in workflows">
+                <tbody ng-repeat="workflow in workflows" ng-cloak>
                     <tr>
                         <td>
                             <div class="valign-center">{{workflow.name}}</div>
@@ -212,8 +220,6 @@
     </script>
 
     <script src="js/vendor/bootstrap.min.js"></script>
-
-    <script src="js/vendor/angular.js"></script>
 
     <script src="js/main.js"></script>
 
