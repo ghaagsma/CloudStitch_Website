@@ -95,6 +95,7 @@ function StitchController($scope) {
             url: "/api/workflows/",
             type: "POST",
             data: wFlow,
+            crossDomain: true,
             success: function() {
                 alert("success");
                 $("#result").html('submitted successfully');
@@ -113,10 +114,48 @@ function StitchController($scope) {
     };
 }
 
+function stitchTypeChanged(index) {
+    console.log('Stitch Type Changed');
+    console.log('index: ' + index);
+
+    var selected = $('#stitchTypeSelector' + index).val();
+    console.log('selected: ' + selected);
+
+    if (selected == '0') {
+        $('#xml-element-' + index).css('display', 'none');
+        $('#sms-element-' + index).css('display', 'none');
+        $('#rss-element-' + index).css('display', 'block');
+    } else if (selected == '1') {
+        $('#rss-element-' + index).css('display', 'none');
+        $('#sms-element-' + index).css('display', 'none');
+        $('#xml-element-' + index).css('display', 'block');
+    } else {
+        $('#rss-element-' + index).css('display', 'none');
+        $('#xml-element-' + index).css('display', 'none');
+        $('#sms-element-' + index).css('display', 'block');
+    }
+}
+
 $(function() {
     $('.stitchTypeSelector').change(function() {
         var selected = $(this).val();
-        $(".stitchTypeElement-" + selected).hide();
-        $('#' + selected).show();
+        var index = $(this).id;
+
+        console.log('selected: ' + selected);
+        console.log('index: ' + index);
+
+        if (selected == '0') {
+            $('#xml-element-' + index).style.display = 'none';
+            $('#sms-element-' + index).style.display = 'none';
+            $('#rss-element-' + index).style.display = 'block';
+        } else if (selected == '1') {
+            $('#rss-element-' + index).style.display = 'none';
+            $('#sms-element-' + index).style.display = 'none';
+            $('#xml-element-' + index).style.display = 'block';
+        } else {
+            $('#rss-element-' + index).style.display = 'none';
+            $('#xml-element-' + index).style.display = 'none';
+            $('#sms-element-' + index).style.display = 'block';
+        }
     }).change()
 });
