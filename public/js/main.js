@@ -1,4 +1,4 @@
-function StitchController($scope) {
+function StitchController($scope, $http) {
 
     $http.defaults.headers.common["x-zumo-application"] = "CRpeeOnzAGfdSjmgrsageYSawSyOdg40";
     $http({ method: "GET", url: "https://cloudstitch.azure-mobile.net/api/workflows/" }).
@@ -174,6 +174,7 @@ function refreshAuthDisplay() {
     $("#logged-in").toggle(isLoggedIn);
     $("#logged-out").toggle(!isLoggedIn);
     if (isLoggedIn) {
+        console.log(window.azureClient.currentUser);
         $("#login-name").text(window.azureClient.currentUser.userId);
         showWorkflows();
     }
