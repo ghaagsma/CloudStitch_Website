@@ -1,8 +1,9 @@
 function StitchController($scope) {
 
     $.ajax({
+        header: {'x-zumo-application':'CRpeeOnzAGfdSjmgrsageYSawSyOdg40'},
         type: "GET",
-        url: "/api/workflows/",
+        url: "http://cloudstitch.azure-mobile.net/api/workflows/",
         crossDomain: true,
         success: function (data) {
             console.log(data);
