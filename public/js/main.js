@@ -46,6 +46,7 @@ function StitchController($scope, $http) {
         if (!workflowName) {
             var message = "Please give your workflow a name.";
             $('#alertPlaceholder').html('<div id="alertDiv" class="alert alert-danger"><a class="close" data-dismiss="alert">×</a><span>' + message + '</span></div>')
+            $("#workflowNameInput").focus();
             return;
         }
 
@@ -126,21 +127,33 @@ function StitchController($scope, $http) {
             data: wFlow,
             crossDomain: true,
             headers: { "x-zumo-application": "CRpeeOnzAGfdSjmgrsageYSawSyOdg40" },
-            success: function() {
+            success: function(data) {
                 $("#result").html('submitted successfully');
+                $scope.workflows.push(data);
             },
             error: function() {
                 $("#result").html('there is error while submit');
             }
         });
 
-        $scope.workflows.push(wFlow);
-
         $('#nothingHereIndicator').css('display', 'none');
         $('#workflowModal').modal('hide');
         $('#alertDiv').remove();
         $('#workflowNameInput').val("");
     };
+
+    $scope.DeleteWorkflow = function(index) {
+        $scope.workflows.splice(index, 1);
+
+        console.log("Table length: " + $scope.workflows.length);
+
+        if($scope.workflows.length == 0) {
+            $('#nothingHereIndicator').css('display', 'block');
+        }
+
+        // Delete the workflow from the backend
+
+    }
 }
 
 function stitchTypeChanged(index) {
