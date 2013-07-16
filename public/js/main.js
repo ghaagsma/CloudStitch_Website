@@ -1,28 +1,25 @@
-function MainController($scope) {
-
-}
-
-function LoginController($scope) {
-
-}
-
 function StitchController($scope) {
-    $.ajax({
-        headers: {
-            'x-zumo-application': 'CRpeeOnzAGfdSjmgrsageYSawSyOdg40'
-        },
-        type: "GET",
-        url: "https://cloudstitch.azure-mobile.net/api/workflows/",
-        crossDomain: true,
-        headers: {
-            "x-zumo-application": "CRpeeOnzAGfdSjmgrsageYSawSyOdg40"
-        },
-        success: function(data) {
-            $scope.stitchTemplates = data;
-        }
-    });
 
-    $scope.workflows = [];
+    $http.defaults.headers.common["x-zumo-application"] = "CRpeeOnzAGfdSjmgrsageYSawSyOdg40";
+    $http({ method: "GET", url: "https://cloudstitch.azure-mobile.net/api/workflows/" }).
+        success(function (data, status) {
+            console.log(data);
+            $scope.workflows = data;
+        }).
+        error(function (data, status) {
+            console.log(data);
+            console.log(status);
+        });
+
+    $http({ method: "GET", url: "https://cloudstitch.azure-mobile.net/api/stitches/" }).
+        success(function (data, status) {
+            $scope.stitchTemplates = data;
+        }).
+        error(function (data, status) {
+            console.log(data);
+            console.log(status);
+        });
+
     $scope.stitches = [];
 
     $scope.NewWorkflow = function() {
@@ -112,23 +109,30 @@ function StitchController($scope) {
         console.log(wFlow);
 
         // Send new workflow to backend
-        $.ajax({
-            url: "https://cloudstitch.azure-mobile.net/api/workflows/",
-            type: "POST",
-            data: wFlow,
-            crossDomain: true,
-            headers: {
-                "x-zumo-application": "CRpeeOnzAGfdSjmgrsageYSawSyOdg40"
-            },
-            success: function() {
-                alert("success");
-                $("#result").html('submitted successfully');
-            },
-            error: function() {
-                alert("failure");
-                $("#result").html('there is error while submit');
-            }
-        });
+        $http.defaults.headers.common["x-zumo-application"] = "CRpeeOnzAGfdSjmgrsageYSawSyOdg40";
+        $http({ method: "POST", url: "https://cloudstitch.azure-mobile.net/api/workflows/" }).
+            success(function (data, status) {
+                console.log(data);
+                $scope.workflows = data;
+            }).
+            error(function (data, status) {
+                console.log(data);
+                console.log(status);
+            });
+
+        //$.ajax({
+        //    url: "https://cloudstitch.azure-mobile.net/api/workflows/",
+        //    type: "POST",
+        //    data: wFlow,
+        //    crossDomain: true,
+        //    headers: { "x-zumo-application": "CRpeeOnzAGfdSjmgrsageYSawSyOdg40" },
+        //    success: function() {
+        //        $("#result").html('submitted successfully');
+        //    },
+        //    error: function() {
+        //        $("#result").html('there is error while submit');
+        //    }
+        //});
 
         $scope.workflows.push(wFlow);
 
