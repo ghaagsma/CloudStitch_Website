@@ -101,7 +101,7 @@
                                 <div class="accordion-heading">
                                     <a class="accordion-toggle" data-toggle="collapse" data-parent="#stitchCollapse" href="#{{$index}}-collapse">
                                         <div class="float-left">
-                                            [{{$index}}] {{stitch.name}}
+                                            [{{$index}}] {{stitchNameBind}}
                                         </div>
                                         <div align="right">
                                             <button class="btn btn-danger img-rounded" ng-click="DeleteStitch($index)">Delete</button>
@@ -114,7 +114,7 @@
                                             <div class="control-group">
                                                 <label class="control-label">Name</label>
                                                 <div class="controls">
-                                                    <input id="stitchNameInput{{$index}}" type="text" class="input-xlarge" value={{stitch.name}}>
+                                                    <input id="stitchNameInput{{$index}}" type="text" class="input-xlarge" value="New Stitch" ng-model="stitchNameBind">
                                                 </div>
                                             </div>
                                             <div class="control-group">
@@ -131,7 +131,7 @@
 
                                                 <!-- Toggle-able Data-entry Forms -->
                                                 <div id="StitchToggleArea">
-                                                    <div class="rss-element-{{$index}} stitchTypeElement-{{$index}}">
+                                                    <div id="rss-element-{{$index}}" class="stitchTypeElement-{{$index}}">
                                                         <h4>RSS</h4>
                                                         <div class="control-group">
                                                             <label class="control-label">Feed URL</label>
@@ -140,7 +140,7 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div class="xml-element-{{$index}} stitchTypeElement-{{$index}}">
+                                                    <div id="xml-element-{{$index}}" class="stitchTypeElement-{{$index}}">
                                                         <h4>XML</h4>
                                                         <div class="control-group">
                                                             <label class="control-label">XML URL</label>
@@ -155,7 +155,7 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div class="sms-element-{{$index}} stitchTypeElement-{{$index}}">
+                                                    <div id="sms-element-{{$index}}" class="stitchTypeElement-{{$index}}">
                                                         <h4>SMS</h4>
                                                         <div class="control-group">
                                                             <label class="control-label">Phone number</label>

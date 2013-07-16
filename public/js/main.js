@@ -20,7 +20,7 @@ function StitchController($scope) {
 
     $scope.AddStitch = function() {
         $scope.stitches.push({
-            name: 'New Stitch'
+            name: ''
         });
     };
 
