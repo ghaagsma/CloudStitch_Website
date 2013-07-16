@@ -60,7 +60,7 @@
     <div class="container">
         <!-- Main hero unit for a primary marketing message or call to action -->
         <div class="hero-unit" ng-controller="StitchController">
-            <span>
+            <div>
                 <h2 class="float-left">Workflows</h2>
                 <div class="float-right">
                     <button href="#workflowModal" data-toggle="modal" ng-click="NewWorkflow();" class="btn btn-primary btn-new-workflow img-rounded">New</button>
@@ -71,10 +71,22 @@
                 <div id="workflowModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="workflowModalLabel" aria-hidden="true">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                        <h3 id="workflowModalLabel">Create a new workflow</h3>
+                        <h3 id="workflowModalLabel">Create a new Workflow</h3>
                         <h5 id="workflowModalDesc"></h5>
                     </div>
                     <div class="modal-body">
+                        <h4 class="float-left">Workflow Data</h4>
+                        <br />
+                        <br />
+                        <div id="alertPlaceholder"></div>
+                        <form class="form-horizontal">
+                            <div class="control-group">
+                                <label class="control-label">Name</label>
+                                <div class="controls">
+                                    <input id="workflowNameInput" type="text" class="input-xlarge" value={{stitch.name}}>
+                                </div>
+                            </div>
+                        </form>
 
                         <!-- Manage Stitches -->
 
@@ -88,7 +100,12 @@
                             <div class="accordion-group" ng-repeat="stitch in stitches">
                                 <div class="accordion-heading">
                                     <a class="accordion-toggle" data-toggle="collapse" data-parent="#stitchCollapse" href="#{{$index}}-collapse">
-                                        [{{$index}}] {{stitch.name}}
+                                        <div class="float-left">
+                                            [{{$index}}] {{stitch.name}}
+                                        </div>
+                                        <div align="right">
+                                            <button class="btn btn-danger img-rounded" ng-click="DeleteStitch($index)">Delete</button>
+                                        </div>
                                     </a>
                                 </div>
                                 <div id="{{$index}}-collapse" class="accordion-body collapse">
@@ -97,7 +114,7 @@
                                             <div class="control-group">
                                                 <label class="control-label">Name</label>
                                                 <div class="controls">
-                                                    <input id="stitchNameInput" type="text" class="input-xlarge" value={{stitch.name}}>
+                                                    <input id="stitchNameInput{{$index}}" type="text" class="input-xlarge" value={{stitch.name}}>
                                                 </div>
                                             </div>
                                             <div class="control-group">
@@ -105,28 +122,49 @@
                                                 <!-- Control for toggling data-entry forms -->
                                                 <label class="control-label">Type</label>
                                                 <div class="controls">
-                                                    <select class="stitchTypeSelector">
-                                                        <option value="rss-{{$index}}">Get RSS</option>
-                                                        <option value="xml-{{$index}}">Parse XML</option>
-                                                        <option value="sms-{{$index}}">Send SMS</option>
+                                                    <select id="stitchTypeSelector{{$index}}" class="stitchTypeSelector">
+                                                        <option value="0">Get RSS</option>
+                                                        <option value="1">Parse XML</option>
+                                                        <option value="2">Send SMS</option>
                                                     </select>
                                                 </div>
 
                                                 <!-- Toggle-able Data-entry Forms -->
                                                 <div id="StitchToggleArea">
-                                                    <div id="rss-{{$index}}" class="rss-element-{{$index}} stitchTypeElement-{{$index}}">
-                                                        <h3>RSS</h3>
+                                                    <div class="rss-element-{{$index}} stitchTypeElement-{{$index}}">
+                                                        <h4>RSS</h4>
+                                                        <div class="control-group">
+                                                            <label class="control-label">Feed URL</label>
+                                                            <div class="controls">
+                                                                <input id="rssUrlInput{{$index}}" type="text" class="input-xlarge">
+                                                            </div>
+                                                        </div>
                                                     </div>
-                                                    <div id="xml-{{$index}}" class="xml-element-{{$index}} stitchTypeElement-{{$index}}">
-                                                        <h3>XML</h3>
+                                                    <div class="xml-element-{{$index}} stitchTypeElement-{{$index}}">
+                                                        <h4>XML</h4>
+                                                        <div class="control-group">
+                                                            <label class="control-label">XML URL</label>
+                                                            <div class="controls">
+                                                                <input id="xmlUrlInput{{$index}}" type="text" class="input-xlarge">
+                                                            </div>
+                                                        </div>
+                                                        <div class="control-group">
+                                                            <label class="control-label">XPath Selector</label>
+                                                            <div class="controls">
+                                                                <input id="xmlPathInput{{$index}}" type="text" class="input-xlarge">
+                                                            </div>
+                                                        </div>
                                                     </div>
-                                                    <div id="sms-{{$index}}" class="sms-element-{{$index}} stitchTypeElement-{{$index}}">
-                                                        <h3>SMS</h3>
+                                                    <div class="sms-element-{{$index}} stitchTypeElement-{{$index}}">
+                                                        <h4>SMS</h4>
+                                                        <div class="control-group">
+                                                            <label class="control-label">Phone number</label>
+                                                            <div class="controls">
+                                                                <input id="smsInput{{$index}}" type="text" class="input-xlarge">
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
-
-                                                <!-- Submit / Cancel Buttons -->
-
                                             </div>
                                         </form>
                                     </div>
@@ -136,29 +174,18 @@
                     </div>
                     <div class="modal-footer">
                         <button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>
-                        <button class="btn btn-primary" onclick="CreateWorkflow()">Create Workflow</button>
+                        <button class="btn btn-primary" ng-click="CreateWorkflow()">Create Workflow</button>
                     </div>
                 </div>
 
                 <!-- End: Add/Edit Workflow Modal -->
 
-            </span>
+            </div>
             <table id="workflowTable" class="table table-hover table-condensed cursor-pointer">
-                <tbody>
+                <tbody ng-repeat="workflow in workflows">
                     <tr>
                         <td>
-                            <div class="valign-center">Workflow 1</div>
-                        </td>
-                        <td>
-                            <div class="valign-center" align="right">
-                                <button class="btn btn-warning img-rounded">Edit</button>
-                                <button class="btn btn-danger img-rounded">Delete</button>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <div class="valign-center">Workflow 2</div>
+                            <div class="valign-center">{{workflow.name}}</div>
                         </td>
                         <td>
                             <div class="valign-center" align="right">
