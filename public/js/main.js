@@ -109,30 +109,30 @@ function StitchController($scope, $http) {
         console.log(wFlow);
 
         // Send new workflow to backend
-        $http.defaults.headers.common["x-zumo-application"] = "CRpeeOnzAGfdSjmgrsageYSawSyOdg40";
-        $http({ method: "POST", url: "https://cloudstitch.azure-mobile.net/api/workflows/" }).
-            success(function (data, status) {
-                console.log(data);
-                $scope.workflows = data;
-            }).
-            error(function (data, status) {
-                console.log(data);
-                console.log(status);
-            });
+        //$http.defaults.headers.common["x-zumo-application"] = "CRpeeOnzAGfdSjmgrsageYSawSyOdg40";
+        //$http({ method: "POST", url: "https://cloudstitch.azure-mobile.net/api/workflows/" }).
+        //    success(function (data, status) {
+        //        console.log(data);
+        //        $scope.workflows = data;
+        //    }).
+        //    error(function (data, status) {
+        //        console.log(data);
+        //        console.log(status);
+        //    });
 
-        //$.ajax({
-        //    url: "https://cloudstitch.azure-mobile.net/api/workflows/",
-        //    type: "POST",
-        //    data: wFlow,
-        //    crossDomain: true,
-        //    headers: { "x-zumo-application": "CRpeeOnzAGfdSjmgrsageYSawSyOdg40" },
-        //    success: function() {
-        //        $("#result").html('submitted successfully');
-        //    },
-        //    error: function() {
-        //        $("#result").html('there is error while submit');
-        //    }
-        //});
+        $.ajax({
+            url: "https://cloudstitch.azure-mobile.net/api/workflows/",
+            type: "POST",
+            data: wFlow,
+            crossDomain: true,
+            headers: { "x-zumo-application": "CRpeeOnzAGfdSjmgrsageYSawSyOdg40" },
+            success: function() {
+                $("#result").html('submitted successfully');
+            },
+            error: function() {
+                $("#result").html('there is error while submit');
+            }
+        });
 
         $scope.workflows.push(wFlow);
 
