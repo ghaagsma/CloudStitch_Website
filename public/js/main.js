@@ -1,4 +1,14 @@
 function StitchController($scope) {
+
+    $.ajax({
+        type: "GET",
+        url: "/api/workflows/",
+        crossDomain: true,
+        success: function (data) {
+            console.log(data);
+        }
+    });
+
     $scope.workflows = [];
     $scope.stitches = [];
 
@@ -93,8 +103,9 @@ function StitchController($scope) {
         // Send new workflow to backend
         $.ajax({
             url: "/api/workflows/",
-            type: "post",
+            type: "POST",
             data: wFlow,
+            crossDomain: true,
             success: function() {
                 alert("success");
                 $("#result").html('submitted successfully');
