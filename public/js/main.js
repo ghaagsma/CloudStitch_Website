@@ -1,4 +1,14 @@
 function StitchController($scope) {
+
+    $.ajax({
+        type: "GET",
+        url: "/api/workflows/",
+        crossDomain: true,
+        success: function (data) {
+            console.log(data);
+        }
+    });
+
     $scope.workflows = [];
     $scope.stitches = [];
 
