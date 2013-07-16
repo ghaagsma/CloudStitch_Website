@@ -4541,3 +4541,6 @@ a.label:hover, a.label:focus, a.badge:hover, a.badge:focus {
 .float-left {
     float: left;
 }
+.login-status {
+    margin-right: 5px;
+}

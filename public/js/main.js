@@ -1,20 +1,24 @@
 function MainController($scope) {
-    
+
 }
 
 function LoginController($scope) {
-    
+
 }
 
 function StitchController($scope) {
 
     $.ajax({
-        headers: {'x-zumo-application':'CRpeeOnzAGfdSjmgrsageYSawSyOdg40'},
+        headers: {
+            'x-zumo-application': 'CRpeeOnzAGfdSjmgrsageYSawSyOdg40'
+        },
         type: "GET",
         url: "https://cloudstitch.azure-mobile.net/api/workflows/",
         crossDomain: true,
-        headers: { "x-zumo-application" : "CRpeeOnzAGfdSjmgrsageYSawSyOdg40" },
-        success: function (data) {
+        headers: {
+            "x-zumo-application": "CRpeeOnzAGfdSjmgrsageYSawSyOdg40"
+        },
+        success: function(data) {
             $scope.stitchTemplates = data;
         }
     });
@@ -117,7 +121,9 @@ function StitchController($scope) {
             type: "POST",
             data: wFlow,
             crossDomain: true,
-            headers: { "x-zumo-application": "CRpeeOnzAGfdSjmgrsageYSawSyOdg40" },
+            headers: {
+                "x-zumo-application": "CRpeeOnzAGfdSjmgrsageYSawSyOdg40"
+            },
             success: function() {
                 alert("success");
                 $("#result").html('submitted successfully');
@@ -158,30 +164,6 @@ function stitchTypeChanged(index) {
     }
 }
 
-$(function() {
-    $('.stitchTypeSelector').change(function() {
-        var selected = $(this).val();
-        var index = $(this).id;
-
-        console.log('selected: ' + selected);
-        console.log('index: ' + index);
-
-        if (selected == '0') {
-            $('#xml-element-' + index).style.display = 'none';
-            $('#sms-element-' + index).style.display = 'none';
-            $('#rss-element-' + index).style.display = 'block';
-        } else if (selected == '1') {
-            $('#rss-element-' + index).style.display = 'none';
-            $('#sms-element-' + index).style.display = 'none';
-            $('#xml-element-' + index).style.display = 'block';
-        } else {
-            $('#rss-element-' + index).style.display = 'none';
-            $('#xml-element-' + index).style.display = 'none';
-            $('#sms-element-' + index).style.display = 'block';
-        }
-    }).change()
-});
-
 function showWorkflows() {
     console.log('showWorkflows');
 }
@@ -198,7 +180,7 @@ function refreshAuthDisplay() {
 
 function logIn() {
     console.log("Logging in...");
-    window.azureClient.login("google").then(refreshAuthDisplay, function(error){
+    window.azureClient.login("google").then(refreshAuthDisplay, function(error) {
         alert(error);
     });
 }
@@ -209,8 +191,8 @@ function logOut() {
     //$('#summary').html('<strong>You must login to access data.</strong>');
 }
 
-$(function () {
-    $('.stitchTypeSelector').change(function () {
+$(function() {
+    $('.stitchTypeSelector').change(function() {
         var selected = $(this).val();
         $(".stitchTypeElement-" + selected).hide();
         $('#' + selected).show();
@@ -225,6 +207,6 @@ $(function () {
     $("#logged-in button").click(logOut);
 });
 
-$('#workflowModal').on('shown', function () {
-     $("#workflowNameInput").focus();
- });
+$('#workflowModal').on('shown', function() {
+    $("#workflowNameInput").focus();
+});
