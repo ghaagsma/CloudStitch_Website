@@ -1,11 +1,20 @@
+function MainController($scope) {
+    
+}
+
+function LoginController($scope) {
+    
+}
+
 function StitchController($scope) {
 
     $.ajax({
         type: "GET",
-        url: "/api/workflows/",
+        url: "https://cloudstitch.azure-mobile.net/api/stitches/",
         crossDomain: true,
+        headers: { "x-zumo-application": "CRpeeOnzAGfdSjmgrsageYSawSyOdg40" },
         success: function (data) {
-            console.log(data);
+            $scope.stitchTemplates = data;
         }
     });
 
@@ -20,7 +29,7 @@ function StitchController($scope) {
 
     $scope.AddStitch = function() {
         $scope.stitches.push({
-            name: ''
+            name: 'New stitch'
         });
     };
 
@@ -102,10 +111,11 @@ function StitchController($scope) {
 
         // Send new workflow to backend
         $.ajax({
-            url: "/api/workflows/",
+            url: "https://cloudstitch.azure-mobile.net/api/workflows/",
             type: "POST",
             data: wFlow,
             crossDomain: true,
+            headers: { "x-zumo-application": "CRpeeOnzAGfdSjmgrsageYSawSyOdg40" },
             success: function() {
                 alert("success");
                 $("#result").html('submitted successfully');
@@ -124,10 +134,45 @@ function StitchController($scope) {
     };
 }
 
-$(function() {
-    $('.stitchTypeSelector').change(function() {
+function showWorkflows() {
+    console.log('showWorkflows');
+}
+
+function refreshAuthDisplay() {
+    var isLoggedIn = window.azureClient.currentUser !== null;
+    $("#logged-in").toggle(isLoggedIn);
+    $("#logged-out").toggle(!isLoggedIn);
+    if (isLoggedIn) {
+        $("#login-name").text(window.azureClient.currentUser.userId);
+        showWorkflows();
+    }
+}
+
+function logIn() {
+    console.log("Logging in...");
+    window.azureClient.login("google").then(refreshAuthDisplay, function(error){
+        alert(error);
+    });
+}
+
+function logOut() {
+    window.azureClient.logout();
+    refreshAuthDisplay();
+    //$('#summary').html('<strong>You must login to access data.</strong>');
+}
+
+$(function () {
+    $('.stitchTypeSelector').change(function () {
         var selected = $(this).val();
         $(".stitchTypeElement-" + selected).hide();
         $('#' + selected).show();
-    }).change()
+    }).change();
+
+    var client = window.azureClient = new WindowsAzure.MobileServiceClient(
+        'https://cloudstitch.azure-mobile.net/',
+        'CRpeeOnzAGfdSjmgrsageYSawSyOdg40');
+
+    refreshAuthDisplay();
+    $("#logged-out button").click(logIn);
+    $("#logged-in button").click(logOut);
 });

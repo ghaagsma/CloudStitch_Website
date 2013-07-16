@@ -4,11 +4,17 @@
    Author's custom styles
    ========================================================================== */
 
+.btn-new-workflow {
+    margin-top: 20px;
+    /*margin-right: 6px;
+    width: 50px;*/
+}
 
-
-
-
-
+.headerText {
+    color: rgb(200, 200, 200);
+    display: inline-block;
+    font-size: small;
+}
 
 
 
