@@ -88,6 +88,8 @@ function StitchController($scope) {
 
         var wFlow = $scope.workflows.pop();
 
+        console.log(wFlow);
+
         // Send new workflow to backend
         $.ajax({
             url: "/api/workflows/",
