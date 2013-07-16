@@ -100,7 +100,7 @@ function StitchController($scope) {
         }
 
         $scope.workflows.push({
-            lastRunDate: new Date(0),
+            lastRunDate: (new Date(0)).toJSON(),
             lastRunStep: 0,
             lastRunComplete: false,
             name: $('#workflowNameInput').val(),

@@ -13,7 +13,8 @@
 .headerText {
     color: rgb(200, 200, 200);
     display: inline-block;
-    font-size: small;
+    font-size: smaller;
+    line-height: 100%;
 }
 
 
