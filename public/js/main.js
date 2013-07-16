@@ -7,7 +7,6 @@ function LoginController($scope) {
 }
 
 function StitchController($scope) {
-
     $.ajax({
         headers: {
             'x-zumo-application': 'CRpeeOnzAGfdSjmgrsageYSawSyOdg40'
@@ -22,6 +21,7 @@ function StitchController($scope) {
             $scope.stitchTemplates = data;
         }
     });
+
     $scope.workflows = [];
     $scope.stitches = [];
 
@@ -41,11 +41,7 @@ function StitchController($scope) {
 
     $scope.DeleteStitch = function(index) {
         $scope.stitches.splice(index, 1);
-
-        // Not working...
-        $('.accordion-body').each(function() {
-            $(this).removeClass("in");
-        });
+        event.stopPropagation();
     }
 
     $scope.CreateWorkflow = function() {
@@ -208,5 +204,7 @@ $(function() {
 });
 
 $('#workflowModal').on('shown', function() {
-    $("#workflowNameInput").focus();
+    if ($("#workflowNameInput").val() == '') {
+        $("#workflowNameInput").focus();
+    }
 });
